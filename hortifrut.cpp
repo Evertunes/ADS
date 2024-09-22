@@ -76,6 +76,20 @@ void removerProduto(vector<Produto> &produtos)
     auto it = remove_if(produtos.begin(), produtos.end(), [&nome](const Produto &p)
                         { return p.nome == nome; });
 
+        // Verifica se o arquivo foi aberto corretamente
+    if (!arquivo)
+    {
+        cerr << "Erro ao abrir o arquivo!" << endl;
+    }
+    
+    // Escreve os dados no arquivo
+    arquivo << "Nome: " << nome << endl;
+    
+    // Fecha o arquivo
+    arquivo.close();
+    
+    cout << "Dados salvos com sucesso!" << endl;
+    cout << endl;
     if (it != produtos.end())
     {
         produtos.erase(it, produtos.end());
