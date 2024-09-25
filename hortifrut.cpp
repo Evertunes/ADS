@@ -2,8 +2,12 @@
 #include <vector>
 #include <string>
 #include <algorithm>
+#include <fstream> // Incluindo a biblioteca para manipulação de arquivos
 
 using namespace std;
+
+// Abre (ou cria) um arquivo para escrita
+ofstream arquivo("dados.txt");
 
 // Estrutura para armazenar informações de um produto
 struct Produto
@@ -14,7 +18,7 @@ struct Produto
 
 // Função para exibir o menu
 void exibirMenu()
-{   
+{
     cout << "==========================" << endl;
     cout << "1. Adicionar Produto\n";
     cout << "2. Remover Produto\n";
@@ -27,6 +31,7 @@ void exibirMenu()
 // Função para adicionar um produto
 void adicionarProduto(vector<Produto> &produtos)
 {
+
     Produto novoProduto;
     cout << "--------------------------" << endl;
     cout << "Digite o nome do produto: ";
@@ -36,6 +41,22 @@ void adicionarProduto(vector<Produto> &produtos)
     cout << "Digite o preço do produto: ";
     cin >> novoProduto.preco;
     produtos.push_back(novoProduto);
+    
+    // Verifica se o arquivo foi aberto corretamente
+    if (!arquivo)
+    {
+        cerr << "Erro ao abrir o arquivo!" << endl;
+    }
+    
+    // Escreve os dados no arquivo
+    arquivo << "Nome: " << novoProduto.nome << endl;
+    arquivo << "Preco: " << novoProduto.preco << endl;
+    
+    // Fecha o arquivo
+    arquivo.close();
+    
+    cout << "Dados salvos com sucesso!" << endl;
+    cout << endl;
     cout << "--------------------------" << endl;
     cout << "==========================" << endl;
     cout << "Produto adicionado com sucesso!\n";
@@ -55,6 +76,20 @@ void removerProduto(vector<Produto> &produtos)
     auto it = remove_if(produtos.begin(), produtos.end(), [&nome](const Produto &p)
                         { return p.nome == nome; });
 
+        // Verifica se o arquivo foi aberto corretamente
+    if (!arquivo)
+    {
+        cerr << "Erro ao abrir o arquivo!" << endl;
+    }
+    
+    // Escreve os dados no arquivo
+    arquivo << "Nome: " << nome << endl;
+    
+    // Fecha o arquivo
+    arquivo.close();
+    
+    cout << "Dados salvos com sucesso!" << endl;
+    cout << endl;
     if (it != produtos.end())
     {
         produtos.erase(it, produtos.end());
@@ -84,7 +119,7 @@ void listarProdutos(const vector<Produto> &produtos)
     cout << "Lista de Produtos:\n";
     cout << "--------------------------" << endl;
     cout << endl;
-    
+
     for (const auto &produto : produtos)
     {
         cout << ". Nome: " << produto.nome << ", Preco: R$" << produto.preco << '\n';
@@ -123,6 +158,5 @@ int main()
             break;
         }
     } while (opcao != 4);
-
     return 0;
 }
