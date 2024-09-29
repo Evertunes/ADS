@@ -3,18 +3,15 @@ using namespace std;
 
 bool palindromo;
 
-int main(void)
+void palindr(string Text)
 {
-    string Texto;
     int posicaoReversa = 0;
-    cout << "Digite a palavra : ";
-    cin >> Texto;
     int i;
     do
     {
-        i = Texto.length() - 1;
-        posicaoReversa = Texto.length() - i - 1;
-        if (Texto.substr(i, 1) != Texto.substr(posicaoReversa, 1))
+        i = Text.length() - 1;
+        posicaoReversa = Text.length() - i - 1;
+        if (Text.substr(i, 1) != Text.substr(posicaoReversa, 1))
         {
             palindromo = false;
             cout << "Nao e palindromo!";
@@ -24,4 +21,12 @@ int main(void)
             cout << "E palindromo!";
         break;
     } while (i > 0);
+}
+
+int main(void)
+{
+    string Texto;
+    cout << "Digite a palavra : ";
+    cin >> Texto;
+    palindr(Texto);
 }
