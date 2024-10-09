@@ -1,23 +1,31 @@
 #include <iostream>
 using namespace std;
 
-// Função que troca os valores de dois inteiros
-void troca(int *a, int *b) {
-    int temp = *a; // Armazena o valor de 'a' em uma variável temporária
-    *a = *b;       // Atribui o valor de 'b' a 'a'
-    *b = temp;    // Atribui o valor temporário a 'b'
+int trocaa;
+int trocab;
+
+void troca(int *a, int *b)
+{
+    *a = 50;
+    *b = 120;
+    cout << "Novo valor: " << *a << " e " << *b;
 }
 
-int main() {
-    int x = 5;
-    int y = 10;
+int main()
+{
 
-    std::cout << "Antes da troca: x = " << x << ", y = " << y << std::endl;
+    int a;
+    int b;
 
-    // Chama a função troca passando os endereços de x e y
-    troca(&x, &y);
+    a = 10;
+    b = 20;
 
-    std::cout << "Depois da troca: x = " << x << ", y = " << y << std::endl;
-
-    return 0;
+    cout << "Digite dois valores: ";
+    cout << trocaa, trocab;
+    cout << "Os valores recebidos foram: " << endl;
+    cout << trocaa, trocab;
+    cout << "Os valores anteriores eram: " << endl;
+    cout << a << " e " << b;
+    
+    troca(*trocaa,*trocab);
 }
